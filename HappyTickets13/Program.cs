@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -12,55 +11,28 @@ namespace HappyTickets13
         public static void Main(string[] args)
         {
             char[] numbers = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C' };
-            ////char[] arAlphabet = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
-            //int n = 4;
-            //char[] arBuffer = new char[n];
+            //char[] numbers = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' }; 
 
-            //StringBuilder stringBuilder = new StringBuilder((int)Math.Pow(arAlphabet.Length, n) * (n + 2));
-
-            //RecursionGenerateCombinationsToFile(arAlphabet, arBuffer, 0, stringBuilder);
-            //var list = stringBuilder.ToString().Replace("\r", "").Split('\n').Where(x => x != "").ToArray();
-
-            //var listSum = list.Select(x => (x, Sum(x))).ToArray();
-
-            //var list0Sum = listSum.Where(x => x.x[0] == '0').ToArray();
-
-
-            //// var list0Sum = list0.Select(x => (x, Sum(x))).ToList();
-            //int count = 0;
-            //foreach (var x in arAlphabet)
-            //{
-            //    foreach (var q in list0Sum)
-            //    {
-            //        var co = listSum.Where(y => q.Item2 == y.Item2).ToList();
-            //        Console.WriteLine($"{q.x} {co.Count()}");
-            //        foreach (var c in co)
-            //        {
-            //            count++;
-            //            //Console.WriteLine($"{q.x} {x} {c.x}");
-            //        }
-            //    }
-            //}
-
-            //максимальное справа
             var maxSum = Sum("CCCCCC");
+            //var maxSum = Sum("9999"); 
 
             var maxSums = new int[maxSum + 1];
+            var count = numbers.Count();
 
-            //for (int a = 0; a < 1; a++)
-            for (int a = 0; a < numbers.Count(); a++)
+            for (int a = 0; a < count; a++)
             {
-                for (int b = 0; b < numbers.Count(); b++)
+                for (int b = 0; b < count; b++)
                 {
-                    for (int c = 0; c < numbers.Count(); c++)
+                    for (int c = 0; c < count; c++)
                     {
-                        for (int d = 0; d < numbers.Count(); d++)
+                        for (int d = 0; d < count; d++)
                         {
-                            for (int e = 0; e < numbers.Count(); e++)
+                            for (int e = 0; e < count; e++)
                             {
-                                for (int f = 0; f < numbers.Count(); f++)
+                                for (int f = 0; f < count; f++)
                                 {
-                                    ++maxSums[a + b + c + d + e + f];
+                                    var index = a + b + c + d + e + f; 
+                                    ++maxSums[index];
                                 }
                             }
                         }
@@ -70,58 +42,32 @@ namespace HappyTickets13
 
             long result = 0;
 
-            //максимальное слева
             var x = Sum("CCCCCC");
-            //for (int i = 0; i < maxSums.Count(); ++i)
-            //{
-            //    if (x <= maxSums[i])
-            //    {
-            //        result += maxSums[i] * maxSums[i];
-            //    }
-            //}
-            //3597455855
-
-
+            //var x = Sum("9999"); 
             for (int i = 0; i < maxSums.Count(); ++i)
             {
                 result += maxSums[i] * maxSums[i];
             }
-            //
+      
+            Console.WriteLine($"Actual result:\n{result}");
 
-            //282160467 - количество комдинаций 0CCCCC
-            //3597463083 - количество комдинаций CCCCCC
+            //Умножаем еще на 1, потому что посередине есть цифра, которая не учитывается при подсчёте комбинаций
+            Console.WriteLine($"Actual result * 13:\n{result * 13}");
 
+            //для 13 значных 13-теричных счастливых билетиков получаем 46767020079 счастливых билетиков
         }
-
-        private static void RecursionGenerateCombinationsToFile(char[] arAlphabet, char[] arBuffer, int order,
-                                                                StringBuilder stringBuilder)
-        {
-            if (order < arBuffer.Length)
-                for (int i = 0; i < arAlphabet.Length; i++)
-                {
-                    arBuffer[order] = arAlphabet[i];
-                    RecursionGenerateCombinationsToFile(arAlphabet, arBuffer, order + 1, stringBuilder);
-                }
-            else
-            {
-                for (int i = 0; i < arBuffer.Length; i++)
-                    stringBuilder.Append(arBuffer[i]);
-                stringBuilder.AppendLine();
-            }
-        }
-
         public static int Sum(string str)
         {
             int x = 0;
             foreach (char c in str)
             {
-                x += ToInt(c.ToString());
+                x += ConvertToInt13(c.ToString());
             }
 
             return x;
         }
 
-        public static int ToInt(string str)
+        public static int ConvertToInt13(string str)
         {
             if (str == "A")
             {
@@ -138,10 +84,10 @@ namespace HappyTickets13
 
             return int.Parse(str);
         }
+
+        //public static int ConvertToInt10(string str)
+        //{
+        //    return int.Parse(str);
+        //}
     }
 }
-
-
-
-
-

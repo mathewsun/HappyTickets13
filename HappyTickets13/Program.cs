@@ -16,6 +16,7 @@ namespace HappyTickets13
             var maxSum = Sum("CCCCCC");
             //var maxSum = Sum("9999"); 
 
+            //индекс массива - сумма чисел, значение ячейки - количество комбинаций 
             var maxSums = new int[maxSum + 1];
             var count = numbers.Count();
 

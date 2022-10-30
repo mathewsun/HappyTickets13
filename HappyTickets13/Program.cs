@@ -32,7 +32,7 @@ namespace HappyTickets13
                             {
                                 for (int f = 0; f < count; f++)
                                 {
-                                    var index = a + b + c + d + e + f; 
+                                    var index = a + b + c + d + e + f;
                                     ++maxSums[index];
                                 }
                             }
@@ -49,7 +49,7 @@ namespace HappyTickets13
             {
                 result += maxSums[i] * maxSums[i];
             }
-      
+
             Console.WriteLine($"Actual result:\n{result}");
 
             //Умножаем еще на 1, потому что посередине есть цифра, которая не учитывается при подсчёте комбинаций
